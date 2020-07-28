@@ -83,6 +83,8 @@ libra/libra/libra/settings.py ➜ INSTALLED_APPS ➜ 'catalog.apps.CatalogConfig
 
 **⚙** path('catalog', include('catalog.urls', name='catalog'))
 
+
+
 from django.urls import path
 
 from . import views
@@ -100,3 +102,6 @@ path(
 views.index - функция обработчик
 name='home' - имя маршрута
  ),
+ 
+include('catalog.urls' - указатель на внешний список path,
+ namespace='catalog' - простарнство имен))
