@@ -11,6 +11,8 @@
 
 ✓ Настроить url.py/Настроить его копию в каталоге приложения
 
+✓ Настройка Django для работы с PostgreSQL
+
 ✓ Создать базу данных
 
 ✓ Создать суперюзера
@@ -81,6 +83,10 @@ libra/libra/libra/settings.py ➜ INSTALLED_APPS ➜ 'catalog.apps.CatalogConfig
 
 ▪ Подключить urls.py приложения к основному файлу Django
 
+
+[https://djbook.ru/rel3.0/topics/http/urls.html][Менеджер URL-ов]
+[https://metanit.com/python/django/3.2.php][Определение маршрутов и функции path и re_path]
+
 **⚙** path('catalog', include('catalog.urls', name='catalog'))
 
 
@@ -105,3 +111,67 @@ name='home' - имя маршрута
  
 include('catalog.urls' - указатель на внешний список path,
  namespace='catalog' - простарнство имен))
+
+#### Настройка Django для работы с PostgreSQL
+
+sudo apt-get install libpq-dev python-dev
+
+sudo apt-get install postgresql postgresql-contrib
+
+pip install psycopg2
+
+#### Создание базы данных и пользователя PostgreSQL
+
+▪ Войти в терминал. Запустить оболочку PostgreSQL
+
+    sudo -u postgres psql
+
+▪ Создать базу данных.
+
+    CREATE DATABASE myproject;
+    
+▪ Создать пользователя, задать пароль.
+       
+    CREATE USER myprojectuser WITH PASSWORD 'password';     
+
+▪ Настроить созданную роль.
+    
+    ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+    ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+    ALTER ROLE myprojectuser SET timezone TO 'UTC';
+    
+
+▪ Дать пользователю доступ для администрирования новой базы данных.
+
+    GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+
+▪ \q
+
+#### Создать суперюзера
+
+▪ python manage.py createsuperuser
+    
+#### Подготовить/Выполнить миграцию
+
+▪ python manage.py makemigrations - подготовить созданную базу данных к миграции.
+
+▪ python manage.py migrate - выполнить миграцию.
+
+
+#### Настроить базу данных  в settings.py
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'myproject',
+            'USER': 'myprojectuser',
+            'PASSWORD': 'password',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
+
+#### Запустить сервер разработки
+
+▪ python manage.py runserver
