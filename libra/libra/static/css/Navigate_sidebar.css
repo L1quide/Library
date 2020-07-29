@@ -1,0 +1,82 @@
+.nav_area{
+	display: grid;
+	grid-gap: 15px;
+	grid-template-columns: 50px auto;
+	grid-template-rows: auto;
+
+	height: 100%;
+}
+.navigation-icon-menu{
+
+}
+
+.icon_panel{
+	align-self: start;
+	list-style-type: none;
+	background-color: #5867dd;
+	height: 100%;
+
+}
+
+.icon_unit{
+	display: grid;
+	width: 50px;
+	height: 50px;
+}
+
+.icon_unit:hover{
+	
+}
+
+.icon{
+	justify-self: center;
+	align-self: center;
+}
+
+.icon > i{
+	color: #fff;
+	font-size: 18px;
+	opacity: .6;
+	transition: all .3s;
+	
+}
+
+.icon > i:hover{
+	opacity: 1;
+}
+
+.navigation-menu-body{
+	padding-right: 15px;
+	box-sizing: border-box;
+}
+
+.navigation-menu-body > .navbar > ul{
+	list-style: none;
+}
+
+.navigation-menu-body > .navbar > ul > li{
+	
+}
+
+.navigation-menu-body > .navbar > ul > li > a{
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;	
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	display: block;
+	padding: 7px 15px;
+	border-radius: 5px;
+	transition: all .3s;
+}
+
+.navigation-menu-body > .navbar > ul > li > a.active{
+	color: #5867dd;
+	background: #ebebeb;
+}
+
+.navigation-menu-body > .navbar > ul > li > a:hover{
+	background: #f5f5f5;
+}

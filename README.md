@@ -108,6 +108,7 @@ path(
 views.index - функция обработчик
 name='home' - имя маршрута
  ),
+<<<<<<< HEAD
  
 include('catalog.urls' - указатель на внешний список path,
  namespace='catalog' - простарнство имен))
@@ -175,3 +176,5 @@ pip install psycopg2
 #### Запустить сервер разработки
 
 ▪ python manage.py runserver
+=======
+>>>>>>> 7948963a1920f3d295eb55a7cb907bc78c1472db

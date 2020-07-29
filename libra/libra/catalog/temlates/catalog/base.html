@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>
+{% block title %}{% endblock %}
+    </title>
+    <link href='{% static "css/base.css" %}'rel="stylesheet">
+</head>
+<body>
+
+
+<div class="wrapper">
+
+<!-- begin::header -->
+<header class="header">
+	<div class="logo">header</div>
+</header>
+<!-- end::header -->
+
+<!-- begin::navigation -->
+<div class="navigation">
+	<div class="nav_area">
+		<div class="navigation-icon-menu">
+
+			<ul class='icon_panel'>
+				<li data-toggle="tooltip" title="Edit Profile" class="icon_unit">
+					<a href="#" class="icon">
+						<i class="fas fa-user"></i>
+					</a>
+				</li>
+				<li data-toggle="tooltip" title="Logout">
+					<a href="login.html" class="go-to-page">
+						<i class="icon ti-power-off">1</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="navigation-menu-body">
+
+			<ul id="navigationElements" class="nav_item_wrap">
+				<li class="nav_item nav_part_title">Elements</li>
+
+				<li class="nav_item">
+					<a href="#" class="nav_linck">Basic</a>
+				</li>
+
+				<li class="nav_item">
+					<a href="avatar.html"  class="nav_linck">Avatars</a>
+				</li>
+
+				<li class="nav_item">
+					<a href="icons.html"  class="nav_linck">Icons</a>
+				</li>
+
+			</ul>
+
+
+
+
+
+
+		</div>
+</div>
+</div>
+<!-- end::navigation -->
+
+
+<main class="main_content">
+<!--{% if messages %}-->
+<!--	<ul class="messages">-->
+<!--	{% for message in messages %}-->
+<!--		<li class="{{ message.tags }}">-->
+<!--		{{ message|safe }}-->
+<!--		<a href="#" class="close">x</a>-->
+<!--		</li>-->
+<!--	{% endfor %}-->
+<!--	</ul>-->
+<!--{% endif %}-->
+
+{% block content %}{% endblock %}
+
+</main>
+
+<footer class="footer">
+	FOOTER
+</footer>
+
+
+</div>
+
+
+
+</body>
+
+</html>

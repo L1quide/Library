@@ -1,0 +1,60 @@
+@import url('header.css');
+@import url('Navigate_sidebar.css');
+@import url('EMP_REG_FORM.css');
+@import url('all.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+* {padding: 0; margin: 0;}	
+body{background-color:#e7ebee;}
+/***/
+.wrapper{
+	height: 100vh;
+	/*justify-content: space-evenly; start end  center stretch space-around space-between space-evenly*/
+	/*align-content: space-evenly; start end  center stretch space-around space-between space-evenly*/
+	display: grid;    
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 25px;
+
+	/*создать сетку с двенадцатью столбцами, каждый шириной доли единицы (1/12 общей ширины). 
+	Создать три строки, где первая будет 50px высотой, вторая 350px и третья 50px. 
+	Наконец, добавить промежуток между элементами в сетке.*/
+
+	grid-template-areas:
+        "m m h h h h h h h h h h"
+        "m m c c c c c c c c c c"
+        "m m f f f f f f f f f f";
+
+}
+
+
+.header{
+	grid-area: h;
+	
+}
+
+.navigation{
+	grid-area: m;
+	background-color: #fff;
+}
+
+.main_content{
+	grid-area: c;
+	
+}
+
+.footer{
+	grid-area: f;
+	background-color: #4d24e0f1;
+}
+
+/*Media*/
+@media screen and (max-width: 640px) {
+    .container {
+        grid-template-areas:
+            "m m m m m m h h h h h h"
+            "c c c c c c c c c c c c"
+            "f f f f f f f f f f f f";
+    }
+}
