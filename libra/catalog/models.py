@@ -17,11 +17,17 @@ class Book(models.Model):
     isbn = models.CharField('ISBM', max_length=13, help_text='dsdf')
     genre = models.ManyToManyField(Genre, help_text='dfsdf')
 
-    def __str__(self):
-        return self.title
+
+    def display_genre(self):
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
 
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
+
+    def __str__(self):
+        return self.title
 
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='dfsbaa')
@@ -42,8 +48,13 @@ class BookInstance(models.Model):
         ordering = ['due_back']
 
     def __str__(self):
-        return f'(self.id) (self.book.title)'
+        return f'{self.id} {self.book.title}'
 
+class Langs(models.Model):
+    name = models.CharField(max_length=200, help_text='sdsd')
+
+    def __str__(self):
+        return self.name
 
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
@@ -55,7 +66,7 @@ class Author(models.Model):
         return reverse('autor-detail', args=[str(self.id)])
 
     def __str__(self):
-        return f'(self.last_name) (self.first_name)'
+        return f'{self.last_name} {self.first_name}'
 
 # Create your models here.
 
