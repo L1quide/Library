@@ -441,9 +441,6 @@ urlpatterns- последовательность из django.urls.path()и / и
 
 [Подробнее](https://docs.djangoproject.com/en/dev/ref/contrib/admin/#module-django.contrib.admin)
 
-
-
-
 #### ✓ Менеджер URL-ов django.conf.urls**
 
 ☛ urlpatterns - последовательность из django.urls.path()и / или django.urls.re_path()экземпляров
@@ -528,30 +525,6 @@ urlpatterns- последовательность из django.urls.path()и / и
 
 [➤ Передача дополнительных опций для просмотра функций]()
 
-
-
-
-**▪ Импортировать в файл контроллера views.py модели** 
-
-    from .models import Book, Author, BookInstance, Genre
-  
-**▪ Пример функции обработчика index()**
-
-    def index(request):
-        Выборка данных из базы 
-        Model.objects.all().count()
-        Model.objects.filter(status__exact='a')
-        
-       ...
-        Отрисовка HTML-шаблона index.html с данными внутри переменной контекста context
-        
-        return render(
-        request,
-        'index.html',
-        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
- 
-☛ [render()](https://docs.djangoproject.com/en/1.10/topics/http/shortcuts/#django.shortcuts.render) - функцию, которая генерирует HTML-файлы при помощи шаблонов страниц и соответствующих данных.
-
 #### ✓ Язык шаблонов Django
 
 ◾ Расширение базового шаблона
@@ -592,7 +565,6 @@ urlpatterns- последовательность из django.urls.path()и / и
        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
     {% endfor %}
  
-
 ⚠ Примечание. Переменные шаблона заключаются в двойные фигурные скобки ({{ num_books }}) , 
   а тэги шаблона (функции шаблона), помещаются в одинарные фигурные скобки со знаками процента ({% extends "base_generic.html" %}).
 
@@ -621,21 +593,42 @@ urlpatterns- последовательность из django.urls.path()и / и
 ▹ Вывести содержимое базы данных в цикле
 
 
+#### ✓ Работа с отбражениями
+
+▸ Отображение на основе функций обработчиков
+
+    def index(request):
+        Выборка данных из базы 
+        Model.objects.all().count()
+        Model.objects.filter(status__exact='a')
+        
+       ...
+        Отрисовка HTML-шаблона index.html с данными внутри переменной контекста context
+        
+        return render(
+        request,
+        'index.html',
+        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
+ 
+☛ [render()](https://docs.djangoproject.com/en/1.10/topics/http/shortcuts/#django.shortcuts.render) - функцию, которая генерирует HTML-файлы при помощи шаблонов страниц и соответствующих данных.
+
+▸ Отображение (на основе базового класса)
+
+Для отображения в django предусмотрен модуль django.views.generic
+
+⚬ [CreateView](https://docs.djangoproject.com/en/1.10/ref/class-based-views/generic-editing/#createview) - Представление, которое отображает форму для создания объекта, повторного отображения формы с ошибками проверки (если они есть) и сохранения объекта.
+
+⚬ [UpdateView](https://docs.djangoproject.com/en/1.10/ref/class-based-views/generic-editing/#updateview) - Представление, которое отображает форму для редактирования существующего объекта, повторного отображения формы с ошибками проверки (если они есть) и сохранения изменений в объекте. 
+При этом используется форма, автоматически сгенерированная из класса модели объекта (если класс формы не указан вручную).
+
+⚬ [DeleteView](https://docs.djangoproject.com/en/1.10/ref/class-based-views/generic-editing/#deleteview) - Представление, которое отображает страницу подтверждения и удаляет существующий объект. Данный объект будет удален, только если метод запроса есть POST. 
+Если это представление получено через GET, оно отобразит страницу подтверждения, которая должна содержать форму, которая отправляет POST на тот же URL.
+
+⚬ [ListView](https://docs.djangoproject.com/en/3.1/topics/class-based-views/mixins/#listview-working-with-many-django-objects) - работа со многими объектами Django
+
+⚬ [DetailView ](https://docs.djangoproject.com/en/3.1/topics/class-based-views/mixins/#detailview-working-with-a-single-django-object) - работа с одним объектом Django
 
  
-
-
-
-#### ✓ Создание страницы co списком содержимого
-    
-⚬ Перенастроить пути с приминением подключонного модуля
-
-    
-    
-**●  Отображение (на основе базового класса)**
-
-    from django.views.generic import (ListView, DetailView)
-    
 ▪ Выводим общий список компонентов
 
     class BookListView(ListView):
@@ -659,20 +652,15 @@ urlpatterns- последовательность из django.urls.path()и / и
 ⚬ Затем добавить в контекст новую информацию.
 ⚬ Затем вернуть новый (обновленный) контекст.
 
-▪ Выводим детальную информацию комонента
+▪ Выводим детальную информацию компонента
  
     class BookDetailView(DetailView):
         ...
     
-        model = Book
-        context_object_name = 'my_book_list'   # ваше собственное имя переменной контекста в шаблоне
-        queryset = Book.objects.filter(status__exact='a')[:5] # Получение 5 книг
-        template_name = 'books/index.html'  # Определение имени вашего шаблона и его расположения
-        
-
-
 [➤ Ссылки по теме](https://docs.djangoproject.com/en/1.10/topics/class-based-views/generic-display/) 
 
+
+[➤ Как использовать sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/)
 
 ✔ - основной шаг плана  
 ◆ - раздел
