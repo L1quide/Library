@@ -60,7 +60,7 @@
 
 #### ✓ Установить Django
 
-▪ pip install Dlango
+▪ pip install Django
 
 #### ✓ Создать проект Django
 

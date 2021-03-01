@@ -20,6 +20,9 @@
 <!-- begin::header -->
 <header class="header">
 	<div class="logo">header</div>
+
+
+
 </header>
 <!-- end::header -->
 
@@ -45,19 +48,13 @@
 		<div class="navigation-menu-body">
 
 			<ul id="navigationElements" class="nav_item_wrap">
-				<li class="nav_item nav_part_title">Elements</li>
-
-				<li class="nav_item">
-					<a href="#" class="nav_linck">Basic</a>
-				</li>
-
-				<li class="nav_item">
-					<a href="avatar.html"  class="nav_linck">Avatars</a>
-				</li>
-
-				<li class="nav_item">
-					<a href="icons.html"  class="nav_linck">Icons</a>
-				</li>
+				{% if user.is_authenticated %}
+				   <li>User: {{ user.get_username }}</li>
+				   <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+				   <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+				   {% else %}
+				   <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+				{% endif %}
 
 			</ul>
 
